@@ -14,6 +14,7 @@
     # Software inputs
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixvim.inputs.flake-parts.follows = "flake-parts";
@@ -21,6 +22,9 @@
     tmux-sessionizer.url = "github:jrmoulton/tmux-sessionizer";
     tmux-sessionizer.inputs.nixpkgs.follows = "nixpkgs";
     tmux-sessionizer.inputs.flake-parts.follows = "flake-parts";
+
+    ghostty.url = "github:ghostty-org/ghostty";
+    ghost-hm.url = "github:clo4/ghostty-hm-module";
   };
 
   # Wired using https://nixos-unified.org/autowiring.html

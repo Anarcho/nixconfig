@@ -4,7 +4,7 @@
     bash = {
       enable = true;
       initExtra = ''
-        # Custom bash profile goes here
+        bind -x '"\C-f":"tms"'
       '';
     };
 

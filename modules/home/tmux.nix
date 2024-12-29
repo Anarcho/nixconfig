@@ -37,8 +37,12 @@ in {
           '';
         }
         tmuxPlugins.sensible
-        tmuxPlugins.gruvbox
-        tmuxPlugins.tmux-powerline
+        {
+          plugin = tmuxPlugins.gruvbox;
+          extraConfig = ''
+            set -g @tmux-gruvbox 'dark'
+          '';
+        }
       ];
 
       extraConfig = ''
@@ -61,7 +65,7 @@ in {
         set -g status-right "#(tms sessions)"
         bind -r '(' switch-client -p\; refresh-client -S
         bind -r ')' switch-client -n\; refresh-client -S
-        bind C-r command-prompt "Rename active session to: " "run-shell 'tms rename %1'"
+        bind C-r command-prompt -p "Rename active session to:" "run-shell 'tms rename %%'"
       '';
     };
 
