@@ -6,7 +6,6 @@ in {
     self.nixosModules.default
     self.nixosModules.desktop
     self.nixosModules.disko
-    self.nixosModules.i3
     ./configuration.nix
   ];
 

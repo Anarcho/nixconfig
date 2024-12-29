@@ -37,9 +37,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.xserver = {
       enable = true;
-
       videoDrivers = cfg.videoDrivers;
-
       displayManager = {
         lightdm = {
           enable = true;
@@ -48,10 +46,7 @@ in {
       };
 
       windowManager.i3 = {
-        virtualisation.virtualbox.guest = lib.mkIf cfg.isVirtualMachine {
-          enable = true;
-          x11 = true;
-        };
+        enable = true;
       };
     };
   };
