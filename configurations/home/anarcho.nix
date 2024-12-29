@@ -10,6 +10,7 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.i3
+    self.homeModules.ghostty
   ];
   home.username = "anarcho";
   home.homeDirectory = lib.mkDefault "/${
@@ -20,6 +21,7 @@ in {
 
   home.i3.enable = true;
   home.tmux.enable = true;
+  home.ghostty.enable = true;
 
   home.stateVersion = "22.11";
 }

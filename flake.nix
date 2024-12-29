@@ -24,7 +24,7 @@
     tmux-sessionizer.inputs.flake-parts.follows = "flake-parts";
 
     ghostty.url = "github:ghostty-org/ghostty";
-    ghost-hm.url = "github:clo4/ghostty-hm-module";
+    ghostty-hm.url = "github:clo4/ghostty-hm-module";
   };
 
   # Wired using https://nixos-unified.org/autowiring.html
