@@ -357,7 +357,8 @@
         "nix-index-database": "nix-index-database",
         "nixos-unified": "nixos-unified",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "tmux-sessionizer": "tmux-sessionizer"
       }
     },
     "systems": {
@@ -372,6 +373,29 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tmux-sessionizer": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733683262,
+        "narHash": "sha256-8lF5Y5QJfMwU7N//ONav3aOk3LZWj6gBiUeafHw0th0=",
+        "owner": "jrmoulton",
+        "repo": "tmux-sessionizer",
+        "rev": "643a30b4b4dc30dcebff51c602b9ee8d10286fb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jrmoulton",
+        "repo": "tmux-sessionizer",
         "type": "github"
       }
     },

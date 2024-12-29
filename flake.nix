@@ -17,6 +17,10 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixvim.inputs.flake-parts.follows = "flake-parts";
+
+    tmux-sessionizer.url = "github:jrmoulton/tmux-sessionizer";
+    tmux-sessionizer.inputs.nixpkgs.follows = "nixpkgs";
+    tmux-sessionizer.inputs.flake-parts.follows = "flake-parts";
   };
 
   # Wired using https://nixos-unified.org/autowiring.html

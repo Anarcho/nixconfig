@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs = {
     # on macOS, you probably don't need this
     bash = {
@@ -15,7 +14,7 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       envExtra = ''
-        # Custom zshrc goes here
+        bindkey -s '^f' "tms\n"
       '';
     };
 
