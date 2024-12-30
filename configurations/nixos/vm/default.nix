@@ -6,6 +6,7 @@ in {
     self.nixosModules.default
     self.nixosModules.desktop
     self.nixosModules.disko
+    self.nixosModules.ghostty
     ./configuration.nix
   ];
 
@@ -13,6 +14,11 @@ in {
     enable = true;
     isVirtualMachine = true;
     videoDrivers = ["virtualbox" "modesetting"];
+  };
+
+  modules.ghostty = {
+    enable = true;
+    defaultTerminal = true;
   };
 
   networking.hostName = "vm";
