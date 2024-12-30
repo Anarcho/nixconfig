@@ -1,9 +1,12 @@
 {
+  flake,
   config,
   lib,
   pkgs,
   ...
 }: let
+  inherit (flake) inputs;
+  inherit (inputs) self;
   cfg = config.home.i3;
 in {
   options.home.i3 = {
@@ -15,8 +18,7 @@ in {
       enable = true;
       config = {
         modifier = "Mod4";
-        terminal = "${pkgs.alacritty}/bin/alacritty";
-
+        terminal = "${flake.inputs.ghostty.packages.${pkgs.system}.default}/bin/ghostty";
         focus = {
           followMouse = true;
         };
@@ -41,10 +43,10 @@ in {
 
         keybindings = let
           modifier = config.xsession.windowManager.i3.config.modifier;
+          terminal = config.xsession.windowManager.i3.config.terminal;
         in
           lib.mkOptionDefault {
-            # Launch Terminal
-            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+            "${modifier}+Return" = "exec ${flake.inputs.ghostty.packages.${pkgs.system}.default}/bin/ghostty";
           };
 
         assigns = {
@@ -87,9 +89,10 @@ in {
     };
 
     home.packages = with pkgs; [
+      ghostty
       i3status
       picom
-      alacritty
+      flake.inputs.ghostty.packages.${pkgs.system}.default
     ];
   };
 }

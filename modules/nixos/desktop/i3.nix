@@ -8,15 +8,13 @@
 in {
   options.modules.i3 = {
     enable = lib.mkEnableOption "i3 window manager";
-
     isVirtualMachine = lib.mkOption {
       type = lib.types.bool;
       default = false;
       description = "Whether the system is running in a virtual machine";
     };
-
     videoDrivers = lib.mkOption {
-      type = lib.types.listOf lib.types.string;
+      type = lib.types.listOf lib.types.str;
       default = ["modesetting"];
       description = ''
         List of video drivers to use. Possible values are:
@@ -35,19 +33,32 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.xserver = {
-      enable = true;
-      videoDrivers = cfg.videoDrivers;
-      displayManager = {
-        lightdm = {
+    services = {
+      xserver = {
+        enable = true;
+        videoDrivers = cfg.videoDrivers;
+
+        # Window Manager configuration
+        windowManager.i3 = {
           enable = true;
         };
-        defaultSession = "none+i3";
-      };
 
-      windowManager.i3 = {
-        enable = true;
+        # Display Manager configuration
+        displayManager = {
+          lightdm = {
+            enable = true;
+          };
+        };
       };
+      displayManager.defaultSession = "none+i3";
     };
+
+    environment.systemPackages = with pkgs; [
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXcursor
+      xorg.libXi
+    ];
   };
 }

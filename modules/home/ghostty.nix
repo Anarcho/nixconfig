@@ -5,6 +5,8 @@
   pkgs,
   ...
 }: let
+  inherit (flake) inputs;
+  inherit (inputs) self;
   cfg = config.home.ghostty;
 in {
   options.home.ghostty = {
@@ -15,6 +17,9 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+    home.packages = [
+      self.ghostty.${pkgs.system}.default
+    ];
     programs.ghostty = {
       enable = true;
       settings = {
