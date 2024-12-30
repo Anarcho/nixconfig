@@ -21,6 +21,10 @@
         "nix-index-database"
         "nixvim"
       ];
+
+      modules = {
+        nixos.ghostty = ./modules/nixos/ghostty;
+      };
     };
   };
 }

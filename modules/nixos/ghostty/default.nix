@@ -11,7 +11,6 @@
 in {
   imports = [
     inputs.ghostty.nixosModules.ghostty
-    ./ghostty.nix
   ];
   options.modules.ghostty = {
     enable = mkEnableOption "ghostty terminal";
