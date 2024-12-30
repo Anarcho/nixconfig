@@ -1,8 +1,7 @@
 {
   description = "A home-manager template providing useful tools & settings for Nix-based development";
-
   inputs = {
-    # Principle inputs (updated by `nix run .#update`)
+    # Principle inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -22,15 +21,10 @@
     tmux-sessionizer.url = "github:jrmoulton/tmux-sessionizer";
     tmux-sessionizer.inputs.nixpkgs.follows = "nixpkgs";
     tmux-sessionizer.inputs.flake-parts.follows = "flake-parts";
-
-    ghostty.url = "github:ghostty-org/ghostty";
-    ghost-hm.url = "github:clo4/ghostty-hm-module";
   };
 
-  # Wired using https://nixos-unified.org/autowiring.html
-  outputs = inputs:
-    inputs.nixos-unified.lib.mkFlake
-    {
+  outputs = inputs @ {self, ...}:
+    inputs.nixos-unified.lib.mkFlake {
       inherit inputs;
       root = ./.;
     };

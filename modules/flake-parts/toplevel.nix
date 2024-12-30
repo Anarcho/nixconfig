@@ -6,6 +6,7 @@
   perSystem = {
     self',
     pkgs,
+    system,
     ...
   }: {
     formatter = pkgs.nixpkgs-fmt;
@@ -21,10 +22,6 @@
         "nix-index-database"
         "nixvim"
       ];
-
-      modules = {
-        nixos.ghostty = ./modules/nixos/ghostty;
-      };
     };
   };
 }
