@@ -20,7 +20,7 @@
         "g?" = "actions.show_help";
         "<CR>" = "actions.select";
         "<C-\\>" = "actions.select_vsplit";
-        "<C-enter>" = "actions.select_split"; # this is used to navigate left
+        "<C-enter>" = "actions.select_split";
         "<C-t>" = "actions.select_tab";
         "<C-v>" = "actions.preview";
         "<C-c>" = "actions.close";
