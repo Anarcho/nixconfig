@@ -2,7 +2,7 @@
   plugins.telescope = {
     enable = true;
     keymaps = {
-      "<leader>ff" = {
+      "<leader><leader>" = {
         options.desc = "file finder";
         action = "find_files";
       };
@@ -13,6 +13,9 @@
     };
     extensions = {
       file-browser.enable = true;
+      fzf-native = {
+        enable = true;
+      };
     };
   };
 }
