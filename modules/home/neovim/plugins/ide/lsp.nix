@@ -25,6 +25,7 @@
         nixpkgs_fmt.enable = true;
         prettier.enable = true;
         clang_format.enable = true;
+        alejandra.enable = true;
       };
     };
   };

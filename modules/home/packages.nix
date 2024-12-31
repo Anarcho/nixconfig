@@ -22,6 +22,30 @@
     # On ubuntu, we need this less for `man home-configuration.nix`'s pager to
     # work.
     less
+
+    # Languages
+    zig
+    go
+    rustc
+
+    # Formatters
+    # Bash 
+    shellcheck
+    shellharden
+    shfmt
+
+    # Lua
+    stylua
+
+    # Rust
+    rustfmt
+
+    # Python
+    isort
+
+    # Go
+    gotools
+    gofumpt
   ];
 
   # Programs natively supported by home-manager.
