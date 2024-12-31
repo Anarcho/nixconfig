@@ -10,6 +10,7 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.i3
+    self.homeModules.packages
   ];
   home.username = "anarcho";
   home.homeDirectory = lib.mkDefault "/${

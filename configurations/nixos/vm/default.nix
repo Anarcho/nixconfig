@@ -6,6 +6,7 @@ in {
     self.nixosModules.default
     self.nixosModules.desktop
     self.nixosModules.disko
+    self.nixosModules.alejandra
     ./configuration.nix
   ];
 

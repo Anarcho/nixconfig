@@ -9,6 +9,8 @@
     nixos-unified.url = "github:srid/nixos-unified";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    alejandra.url = "github:kamadorueda/alejandra";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
 
     # Software inputs
     nix-index-database.url = "github:nix-community/nix-index-database";
