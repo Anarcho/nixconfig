@@ -1,5 +1,6 @@
 {
   keymaps = [
+    # Oil
     {
       mode = "n";
       key = "-";
