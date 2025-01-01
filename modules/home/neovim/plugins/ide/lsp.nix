@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   plugins.lsp = {
     enable = true;
@@ -16,6 +17,11 @@
       "K" = "hover";
     };
   };
+
+  extraPlugins = with pkgs.vimPlugins; [
+    nvim-lspconfig
+    plenary-nvim
+  ];
 
   plugins.none-ls = {
     enable = true;

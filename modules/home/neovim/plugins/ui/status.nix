@@ -4,7 +4,7 @@
       enable = true;
       settings = {
         options = {
-          theme = "gruvbox";
+          theme = "gruvbox_dark";
         };
       };
     };

@@ -3,6 +3,6 @@
     ./ui
     ./editor
     ./ide
-    ./lazy
+    ./snacks
   ];
 }
