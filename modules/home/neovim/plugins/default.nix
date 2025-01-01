@@ -3,5 +3,6 @@
     ./ui
     ./editor
     ./ide
+    ./lazy
   ];
 }
