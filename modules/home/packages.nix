@@ -15,6 +15,7 @@
     nil # Nix language server
     nix-info
     nixpkgs-fmt
+    chafa
 
     # Dev
     tmate
@@ -29,7 +30,7 @@
     rustc
 
     # Formatters
-    # Bash 
+    # Bash
     shellcheck
     shellharden
     shfmt

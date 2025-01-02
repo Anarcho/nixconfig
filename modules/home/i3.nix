@@ -32,7 +32,12 @@ in {
             }
           ];
         };
-
+        startup = [
+          {
+            command = "${pkgs.feh}/bin/feh --bg-fill ~/.config/feh/wallpapper.jpg";
+            always = true;
+          }
+        ];
         gaps = {
           inner = 5;
           outer = 2;
@@ -45,6 +50,9 @@ in {
           lib.mkOptionDefault {
             # Launch Terminal
             "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+            "${modifier}+Mod1+1" = "workspace number 1";
+            "${modifier}+Mod1+2" = "workspace number 2";
+            "${modifier}+Mod1+3" = "workspace number 3";
           };
 
         assigns = {
@@ -90,6 +98,8 @@ in {
       i3status
       picom
       alacritty
+      firefox
+      feh
     ];
   };
 }

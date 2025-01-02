@@ -19,6 +19,13 @@ in {
     else "home"
   }/anarcho";
 
+  home.file = {
+    ".config/nvim/assets/dashboard.png".source = ../../assets/nix-dashboard.png;
+  };
+  home.file = {
+    ".config/feh/wallpaper.jpg".source = ../../assets/wallpaper.jpg;
+  };
+
   home.i3.enable = true;
   home.tmux.enable = true;
 

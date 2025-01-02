@@ -1,4 +1,8 @@
 {
+  pkgs,
+  lib,
+  ...
+}: {
   plugins.snacks = {
     settings = {
       dashboard = {
@@ -42,33 +46,53 @@
               action = ":qa";
             }
           ];
-          sections = [
-            {
-              icon = " ";
-              pane = 2;
-              title = "Keymaps";
-              section = "keys";
-              padding = 1;
-              indent = 3;
-            }
-            {
-              icon = " ";
-              pane = 2;
-              title = "Recent Files";
-              section = "recent_files";
-              padding = 1;
-              indent = 3;
-            }
-            {
-              icon = " ";
-              pane = 2;
-              title = "Projects";
-              section = "projects";
-              padding = 1;
-              indent = 3;
-            }
-          ];
         };
+        sections = [
+          {
+            section = "terminal";
+            cmd = "${lib.getExe pkgs.chafa} $HOME/.config/nvim/assets/dashboard.png --format symbols --symbols vhalf --size 60x17 --stretch; sleep .4";
+            height = 25;
+            padding = 1;
+          }
+          {
+            icon = " ";
+            pane = 2;
+            title = "Keymaps";
+            section = "keys";
+            padding = 1;
+            indent = 3;
+          }
+          {
+            icon = " ";
+            pane = 2;
+            title = "Recent Files";
+            section = "recent_files";
+            padding = 1;
+            indent = 3;
+          }
+          {
+            icon = " ";
+            pane = 2;
+            title = "Projects";
+            section = "projects";
+            padding = 1;
+            indent = 3;
+          }
+          {
+            pane = 2;
+            icon = " ";
+            title = "Git Status";
+            section = "terminal";
+            enabled.__raw = ''
+              Snacks.git.get_root() ~= nil
+            '';
+            cmd = "${pkgs.hub}/bin/hub status --short --branch --renames";
+            height = 5;
+            padding = 1;
+            ttl = 5 * 60;
+            indent = 3;
+          }
+        ];
       };
     };
   };
