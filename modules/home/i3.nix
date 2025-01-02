@@ -15,7 +15,7 @@ in {
       enable = true;
       config = {
         modifier = "Mod4";
-        terminal = "${pkgs.alacritty}/bin/alacritty";
+        terminal = "${pkgs.ghostty}/bin/ghostty";
 
         focus = {
           followMouse = true;
@@ -24,11 +24,14 @@ in {
         window = {
           border = 1;
           titlebar = false;
-
           commands = [
             {
               command = "border pixel 2";
               criteria = {class = "^.*";};
+            }
+            {
+              command = "fullscreen enable";
+              criteria = {class = "^Alacritty$";};
             }
           ];
         };
@@ -37,10 +40,14 @@ in {
             command = "${pkgs.feh}/bin/feh --bg-fill ~/.config/feh/wallpaper.jpg";
             always = true;
           }
+          {
+            command = "workspace number 1";
+            always = false;
+          }
         ];
         gaps = {
-          inner = 5;
-          outer = 2;
+          inner = 10;
+          outer = 5;
           smartGaps = true;
         };
 
@@ -48,16 +55,35 @@ in {
           modifier = config.xsession.windowManager.i3.config.modifier;
         in
           lib.mkOptionDefault {
-            # Launch Terminal
-            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+            "${modifier}+Return" = "exec ${pkgs.ghostty}/bin/ghostty";
+
             "${modifier}+Mod1+1" = "workspace number 1";
             "${modifier}+Mod1+2" = "workspace number 2";
             "${modifier}+Mod1+3" = "workspace number 3";
+
+            # Movement
+            "${modifier}+j" = "focus down";
+            "${modifier}+k" = "focus up";
+            "${modifier}+h" = "focus left";
+            "${modifier}+l" = "focus left";
           };
 
+        defaultWorkspace = "workspace number 1";
+
+        workspaceOutputAssign = [
+          {
+            workspace = "1:Terminal";
+            output = "primary";
+          }
+          {
+            workspace = "2:Web";
+            output = "primary";
+          }
+        ];
+
         assigns = {
-          "1" = [{class = "^Firefox$";}];
-          "2" = [{class = "^code$";}];
+          "1:Terminal" = [{class = "^Firefox$";}];
+          "2:Web" = [{class = "^code$";}];
         };
 
         bars = [
@@ -97,7 +123,7 @@ in {
     home.packages = with pkgs; [
       i3status
       picom
-      alacritty
+      ghostty
       firefox
       feh
     ];

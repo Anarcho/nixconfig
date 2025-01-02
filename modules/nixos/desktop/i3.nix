@@ -41,6 +41,7 @@ in {
         # Window Manager configuration
         windowManager.i3 = {
           enable = true;
+          package = pkgs.i3-gaps;
         };
 
         # Display Manager configuration

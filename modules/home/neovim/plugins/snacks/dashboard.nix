@@ -8,6 +8,18 @@
       dashboard = {
         enable = true;
         preset = {
+          headers = ''
+
+
+            ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+            ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+            ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+            ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+            ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+            ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+
+
+          '';
           keys = [
             {
               icon = " ";
@@ -49,10 +61,8 @@
         };
         sections = [
           {
-            section = "terminal";
-            cmd = "${lib.getExe pkgs.chafa} $HOME/.config/nvim/assets/dashboard.png --format symbols --symbols vhalf --size 60x17 --stretch; sleep .4";
-            height = 25;
-            padding = 1;
+            pane = 2;
+            section = "header";
           }
           {
             icon = " ";
