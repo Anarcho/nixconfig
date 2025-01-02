@@ -34,7 +34,7 @@ in {
         };
         startup = [
           {
-            command = "${pkgs.feh}/bin/feh --bg-fill ~/.config/feh/wallpapper.jpg";
+            command = "${pkgs.feh}/bin/feh --bg-fill ~/.config/feh/wallpaper.jpg";
             always = true;
           }
         ];
