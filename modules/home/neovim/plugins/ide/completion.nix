@@ -2,7 +2,7 @@
   plugins.luasnip.enable = true;
 
   plugins.cmp = {
-    enable = true;
+    enable = false;
     settings = {
       modes = ["i" "s"];
       action = ''
@@ -25,6 +25,38 @@
           require('luasnip').lsp_expand(args.body)
         end
       '';
+    };
+  };
+
+  plugins.blink-cmp = {
+    enable = true;
+    keymap.preset = "super-tab";
+
+    completion = {
+      keyword = {
+        range = "prefix";
+        regex = "[-_]\\|\\k";
+      };
+
+      trigger = {
+        show_on_keyword = true;
+        show_on_trigger_character = true;
+      };
+
+      list = {
+        max_items = 200;
+        selection = "auto_insert";
+        cycle = {
+          from_bottom = true;
+          from_top = true;
+        };
+      };
+
+      accept.auto_brackets = {
+        auto_show = true;
+        auto_show_delay_ms = 300;
+        treesitter_highlighting = true;
+      };
     };
   };
 }
