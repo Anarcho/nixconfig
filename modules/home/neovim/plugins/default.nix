@@ -4,5 +4,6 @@
     ./editor
     ./ide
     ./snacks
+    ./other
   ];
 }

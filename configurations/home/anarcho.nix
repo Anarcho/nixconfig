@@ -10,6 +10,7 @@ in {
   imports = [
     self.homeModules.default
     self.homeModules.i3
+    self.homeModules.obsidian-vaults
     self.homeModules.packages
   ];
   home.username = "anarcho";
@@ -28,6 +29,12 @@ in {
 
   home.i3.enable = true;
   home.tmux.enable = true;
+
+  home.obsidian-vaults = {
+    vaultPath = "$HOME/obsidian";
+    enablePersonal = true;
+    enableWork = true;
+  };
 
   home.stateVersion = "22.11";
 }

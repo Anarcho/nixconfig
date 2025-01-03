@@ -15,6 +15,10 @@ in {
     videoDrivers = ["virtualbox" "modesetting"];
   };
 
+  modules.obsidian = {
+    enable = true;
+  };
+
   networking.hostName = "vm";
 
   home-manager.users."anarcho" = {
