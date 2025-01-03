@@ -66,6 +66,8 @@ in {
             "${modifier}+k" = "focus up";
             "${modifier}+h" = "focus left";
             "${modifier}+l" = "focus left";
+
+            "${modifier}+b" = "exec ${pkgs.firefox}/bin/firefox";
           };
 
         defaultWorkspace = "workspace number 1";
