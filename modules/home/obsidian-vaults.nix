@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.home.obsidian_vaults;
+  cfg = config.home.obsidian-vaults;
 in {
-  options.home.obsidian_vaults = {
+  options.home.obsidian-vaults = {
     vaultPath = lib.mkOption {
       type = lib.types.str;
       default = "$HOME/obsidian";
@@ -26,7 +26,7 @@ in {
     };
   };
 
-  config = lib.mkIf config.modules.obsidiab.enable {
+  config = lib.mkIf config.modules.obsidian.enable {
     home.file = lib.mkMerge [
       # Personal vault structure
       (lib.mkIf cfg.enablePersonal {
