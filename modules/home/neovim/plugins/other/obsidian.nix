@@ -1,6 +1,6 @@
 {
   plugins.obsidian = {
-    enable = false;
+    enable = true;
     settings = {
       workspaces = [
         {
@@ -12,6 +12,8 @@
           path = "~/obsidian/personal";
         }
       ];
+
+      workspace_state_file = "~/.local/state/nvim/obsidian-workspace";
 
       new_notes_location = "current_dir";
 
