@@ -4,12 +4,10 @@
 in {
   imports = [
     self.nixosModules.default
-    self.nixosModules.desktop
+    self.nixosModules.system
     self.nixosModules.disko
     ./configuration.nix
   ];
-
-  host.type = "nixos";
 
   modules.i3 = {
     enable = true;
@@ -21,6 +19,5 @@ in {
 
   home-manager.users."anarcho" = {
     imports = [(self + /configurations/home/anarcho.nix)];
-    host.type = "nixos";
   };
 }
