@@ -1,6 +1,6 @@
 {
   plugins.obsidian = {
-    enable = true;
+    enable = false;
     settings = {
       workspaces = [
         {
@@ -9,7 +9,7 @@
         }
         {
           name = "personal";
-          path = "~/obsidian/";
+          path = "~/obsidian/personal";
         }
       ];
 

@@ -68,7 +68,17 @@ in {
             "${modifier}+l" = "focus left";
 
             "${modifier}+b" = "exec ${pkgs.firefox}/bin/firefox";
+            "${modifier}+o" = "mode obsidian";
           };
+
+        modes = {
+          obsidian = {
+            "p" = ''exec "xdg-open 'obsidian://open?vault=personal'"; mode "default"'';
+            "w" = ''exec "xdg-open 'obsidian://open?vault=work'"; mode "default"'';
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
+        };
 
         defaultWorkspace = "workspace number 1";
 

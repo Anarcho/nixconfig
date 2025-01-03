@@ -2,6 +2,7 @@
   flake,
   pkgs,
   lib,
+  config,
   ...
 }: let
   inherit (flake) inputs;
@@ -31,7 +32,8 @@ in {
   home.tmux.enable = true;
 
   home.obsidian-vaults = {
-    vaultPath = "$HOME/obsidian";
+    enable = true;
+    vaultPath = "${config.home.homeDirectory}/obsidian";
     enablePersonal = true;
     enableWork = true;
   };

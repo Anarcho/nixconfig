@@ -21,6 +21,8 @@ in {
 
   networking.hostName = "vm";
 
+  nixpkgs.config.allowUnfree = true;
+
   home-manager.users."anarcho" = {
     imports = [(self + /configurations/home/anarcho.nix)];
   };
