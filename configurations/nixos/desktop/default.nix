@@ -14,10 +14,10 @@ in {
   modules.i3 = {
     enable = true;
     isVirtualMachine = true;
-    videoDrivers = ["virtualbox" "modesetting"];
+    videoDrivers = ["nvidia"];
   };
 
-  networking.hostName = "vm";
+  networking.hostName = "xdevx";
 
   home-manager.users."anarcho" = {
     imports = [(self + /configurations/home/anarcho.nix)];

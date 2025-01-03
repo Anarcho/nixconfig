@@ -23,10 +23,53 @@
     tmux-sessionizer.inputs.nixpkgs.follows = "nixpkgs";
     tmux-sessionizer.inputs.flake-parts.follows = "flake-parts";
   };
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux"];
 
-  outputs = inputs @ {self, ...}:
-    inputs.nixos-unified.lib.mkFlake {
-      inherit inputs;
-      root = ./.;
+      imports = [
+        # Import your existing flake-parts modules
+        ./modules/flake-parts/devshell.nix
+        ./modules/flake-parts/neovim.nix
+        ./modules/flake-parts/toplevel.nix
+        # Import nixos-unified modules
+        inputs.nixos-unified.flakeModules.default
+        inputs.nixos-unified.flakeModules.autoWire
+      ];
+
+      flake = {
+        # Your nixos-unified systems configurations
+        systems = {
+          vm = {
+            system = "x86_64-linux";
+            nixos = ./configurations/nixos/vm;
+          };
+
+          desktop = {
+            system = "x86_64-linux";
+            nixos = ./configurations/nixos/desktop;
+          };
+
+          wsl = {
+            system = "x86_64-linux";
+            home-manager = {
+              config = ./configurations/home/wsl.nix;
+              username = "anarcho";
+            };
+          };
+
+          linux = {
+            system = "x86_64-linux";
+            home-manager = {
+              config = ./configurations/home/linux.nix;
+              username = "anarcho";
+            };
+          };
+        };
+      };
     };
 }
