@@ -4,123 +4,125 @@
   ...
 }: {
   plugins.snacks = {
+    enable = true;
     settings = {
       dashboard = {
         enable = true;
+        # Define our layout options
+        width = 60;
+        pane_gap = 4;
+
         preset = {
-          headers = ''
-
-
+          header = ''
             ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
             ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
             ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
             ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
             ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
             ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-
-
           '';
+
+          # Define default keymaps for the actions section
+          actions = [
+            {
+              icon = " ";
+              key = "f";
+              desc = "Find File";
+              action = "<leader>ff";
+            }
+            {
+              icon = " ";
+              key = "/";
+              desc = "Find Text";
+              action = "<leader>fr";
+            }
+            {
+              icon = " ";
+              key = "n";
+              desc = "New File";
+              action = ":ene | startinsert";
+            }
+            {
+              icon = " ";
+              key = "r";
+              desc = "Recent Files";
+              action = "<leader>fo";
+            }
+            {
+              icon = "";
+              key = "g";
+              desc = "LazyGit";
+              action = ":LazyGit";
+            }
+          ];
+
+          # Define obsidian keymaps
+          obsidian = [
+            {
+              icon = "󰎚 ";
+              key = "c";
+              desc = "Create Note";
+              action = ":ObsidianNew";
+            }
+            {
+              icon = "󰃰 ";
+              key = "d";
+              desc = "Create Daily";
+              action = ":ObsidianToday";
+            }
+            {
+              icon = "󰍉 ";
+              key = "s";
+              desc = "Find Note";
+              action = ":ObsidianQuickSwitch";
+            }
+            {
+              icon = "󰗈 ";
+              key = "t";
+              desc = "Create From Template";
+              action = ":ObsidianTemplate";
+            }
+            {
+              icon = " ";
+              key = "w";
+              desc = "Switch Workspace";
+              action = ":ObsidianWorkspace";
+            }
+          ];
         };
+
         sections = [
-          # Header section
+          # Header Section
           {
             section = "header";
-            align = "center";
           }
 
-          # Left Pane - General Actions
+          # Left Pane - Actions Section
           {
             pane = 1;
             title = "Actions";
             section = "keys";
+            keys = "actions";
             padding = 1;
             indent = 3;
-            keys = [
-              {
-                icon = " ";
-                key = "f";
-                desc = "Find File";
-                action = "<leader>ff";
-              }
-              {
-                icon = " ";
-                key = "/";
-                desc = "Find Text";
-                action = "<leader>fr";
-              }
-              {
-                icon = " ";
-                key = "n";
-                desc = "New File";
-                action = ":ene | startinsert";
-              }
-              {
-                icon = " ";
-                key = "r";
-                desc = "Recent Files";
-                action = "<leader>fo";
-              }
-              {
-                icon = "";
-                key = "g";
-                desc = "LazyGit";
-                action = ":LazyGit<CR>";
-              }
-            ];
           }
 
-          # Left Pane - Obsidian Actions
+          # Left Pane - Obsidian Section
           {
             pane = 1;
             title = "Obsidian";
-            section = "keys";
+            section = "obsidian";
+            keys = "obsidian";
             padding = 1;
             indent = 3;
-            keys = [
-              # Create general note
-              {
-                icon = "󰎚 ";
-                key = "c";
-                desc = "Create Note";
-                action = ":ObsidianNew<CR>";
-              }
-              # Create daily note
-              {
-                icon = "󰃰 ";
-                key = "d";
-                desc = "Create Daily";
-                action = ":ObsidianToday<CR>";
-              }
-              # Find note using native ObsidianQuickSwitch
-              {
-                icon = "󰍉 ";
-                key = "s";
-                desc = "Find Note";
-                action = ":ObsidianQuickSwitch<CR>";
-              }
-              # Create from template using ObsidianTemplate
-              {
-                icon = "󰗈 ";
-                key = "t";
-                desc = "Create From Template";
-                action = ":ObsidianTemplate<CR>";
-              }
-              # Switch Workspace using native command
-              {
-                icon = " ";
-                key = "w";
-                desc = "Switch Workspace";
-                action = ":ObsidianWorkspace<CR>";
-              }
-            ];
           }
 
           # Right Pane - Recent Files
           {
-            pane = 2;
-            icon = " ";
-            title = "Recent Files";
             section = "recent_files";
+            title = "Recent Files";
+            icon = " ";
+            pane = 2;
             padding = 1;
             indent = 3;
             limit = 10;
@@ -128,21 +130,18 @@
 
           # Right Pane - Recent Obsidian Notes
           {
-            pane = 2;
-            icon = "󰖬 ";
-            title = "Recent Obsidian Notes";
             section = "terminal";
-            enabled.__raw = ''
-              vim.fn.executable('fd') == 1
-            '';
-            cmd = "__raw = function() local ws = vim.fn.system('cat ~/.local/state/nvim/obsidian-workspace 2>/dev/null || echo personal'):gsub('%s+', '') return string.format('fd -t f -e md . ~/obsidian/%s --max-depth 4 --changed-within 7d | sed \"s|.*/\\(.*\\)\\.md$|\\1|\"', ws) end";
+            title = "Recent Obsidian Notes";
+            icon = "󰖬 ";
+            pane = 2;
+            cmd = "cat ~/.local/state/nvim/obsidian-workspace 2>/dev/null || echo personal | xargs -I {} fd -t f -e md . ~/obsidian/{} --max-depth 4 --changed-within 7d | sed 's|.*/\\(.*\\)\\.md$|\\1|'";
             height = 15;
             padding = 1;
-            ttl = 5;
             indent = 3;
+            ttl = 5;
           }
 
-          # Footer - Current Workspace Status
+          # Footer - Current Workspace
           {
             section = "terminal";
             cmd = "echo -n 'Current Workspace: ' && (cat ~/.local/state/nvim/obsidian-workspace 2>/dev/null || echo personal)";

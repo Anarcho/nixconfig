@@ -14,6 +14,7 @@
     sd
     tree
     gnumake
+    xclip
 
     # Nix dev
     cachix
