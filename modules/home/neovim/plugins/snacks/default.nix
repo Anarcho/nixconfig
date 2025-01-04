@@ -3,6 +3,5 @@
     enable = true;
   };
   imports = [
-    ./dashboard.nix
   ];
 }
