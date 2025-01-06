@@ -4,20 +4,16 @@
     settings = {
       workspaces = [
         {
-          name = "work";
-          path = "~/obsidian/work";
-        }
-        {
           name = "personal";
           path = "~/obsidian/personal";
+        }
+        {
+          name = "work";
+          path = "~/obsidian/work";
         }
       ];
 
       workspace_state_file = "~/.local/state/nvim/obsidian-workspace";
-
-      new_notes_location = "current_dir";
-
-      preferred_link_style = "wiki";
 
       daily_notes = {
         folder = "daily";
@@ -38,36 +34,37 @@
 
       picker = {
         name = "fzf-lua";
-        note_mappings = {
-          new = "<C-x>";
-          insert_link = "<C-l>";
-        };
-        tag_mappings = {
-          tag_note = "<C-x>";
-          insert_tag = "<C-l>";
-        };
       };
+
       ui = {
         enable = true;
-        checkboxes = {
-          " " = {
-            char = "☐";
-            hl_group = "ObsidianTodo";
-          };
-          "x" = {
-            char = "☒";
-            hl_group = "ObsidianDone";
-          };
-          ">" = {
-            char = "";
-            hl_group = "ObsidianRightArrow";
-          };
-        };
-        bullets = {
-          char = "•";
-          hl_group = "ObsidianBullet";
-        };
       };
     };
   };
+
+  extraConfigLua = ''
+    -- Add a function to switch workspaces
+    function SwitchObsidianVault(selected_vault)
+      if selected_vault then
+        -- Save the workspace selection to state file
+        vim.fn.system(string.format("echo '%s' > ~/.local/state/nvim/obsidian-workspace", selected_vault))
+
+        -- Get the obsidian client
+        local obsidian = require("obsidian")
+        local client = obsidian.get_client()
+
+        if client then
+          -- Find the workspace config by name
+          for _, workspace in ipairs(client.workspaces) do
+            if workspace.name == selected_vault then
+              -- Switch to the workspace using the client's method
+              client:switch_workspace(workspace)
+              vim.notify("Switched to workspace: " .. selected_vault)
+              return
+            end
+          end
+        end
+      end
+    end
+  '';
 }

@@ -103,56 +103,36 @@
             key_format = " %s";
             action.__raw = ''
               function()
-                local workspaces = { "personal", "work" }
-                require('fzf-lua').fzf_exec(
-                  workspaces,
-                  {
-                    prompt = "Select Workspace> ",
-                    actions = {
-                      ['default'] = function(selected)
-                        if selected and selected[1] then
-                          local workspace = selected[1]
-                          vim.fn.system(string.format("echo '%s' > ~/.local/state/nvim/obsidian-workspace", workspace))
-                          vim.notify("Switched to workspace: " .. workspace)
+                -- Get the obsidian client
+                local obsidian = require("obsidian")
+                local client = obsidian.get_client()
+
+                if client then
+                  -- Extract workspace names
+                  local workspace_names = {}
+                  for _, workspace in ipairs(client.workspaces) do
+                    table.insert(workspace_names, workspace.name)
+                  end
+
+                  -- Show workspace selector
+                  require('fzf-lua').fzf_exec(
+                    workspace_names,
+                    {
+                      prompt = "Select Workspace> ",
+                      actions = {
+                        ['default'] = function(selected)
+                          if selected and selected[1] then
+                            SwitchObsidianVault(selected[1])
+                          end
                         end
-                      end
+                      }
                     }
-                  }
-                )
+                  )
+                else
+                  vim.notify("Obsidian client not initialized", vim.log.levels.ERROR)
+                end
               end
             '';
-          }
-
-          # Tmux Section
-          {
-            icon = "󰆍 ";
-            desc = "Tmux";
-            key = " ";
-            key_format = "";
-            action = "";
-          }
-          {
-            icon = "󰆍 ";
-            desc = "Switch Session";
-            key = "s";
-            key_format = " %s";
-            action = "!tms switch";
-          }
-          {
-            icon = "󰐕 ";
-            desc = "New Session";
-            key = "S";
-            key_format = " %s";
-            action = "!tms open-session";
-          }
-
-          # Quit Option
-          {
-            icon = "󰗼 ";
-            desc = "Quit Neovim";
-            key = "q";
-            key_format = " %s";
-            action = "qa";
           }
         ];
 
@@ -162,7 +142,7 @@
             function()
               local workspace = vim.fn.system("cat ~/.local/state/nvim/obsidian-workspace 2>/dev/null || echo personal"):gsub("^%s*(.-)%s*$", "%1")
               local tmux_session = vim.fn.system("tmux display-message -p '#S' 2>/dev/null || echo 'No session'"):gsub("^%s*(.-)%s*$", "%1")
-              
+
               return {
                 "",
                 "",
@@ -210,22 +190,34 @@
       key = "<leader>w";
       action.__raw = ''
         function()
-          local workspaces = { "personal", "work" }
-          require('fzf-lua').fzf_exec(
-            workspaces,
-            {
-              prompt = "Select Workspace> ",
-              actions = {
-                ['default'] = function(selected)
-                  if selected and selected[1] then
-                    local workspace = selected[1]
-                    vim.fn.system(string.format("echo '%s' > ~/.local/state/nvim/obsidian-workspace", workspace))
-                    vim.notify("Switched to workspace: " .. workspace)
+          -- Get the obsidian client
+          local obsidian = require("obsidian")
+          local client = obsidian.get_client()
+
+          if client then
+            -- Extract workspace names
+            local workspace_names = {}
+            for _, workspace in ipairs(client.workspaces) do
+              table.insert(workspace_names, workspace.name)
+            end
+
+            -- Show workspace selector
+            require('fzf-lua').fzf_exec(
+              workspace_names,
+              {
+                prompt = "Select Workspace> ",
+                actions = {
+                  ['default'] = function(selected)
+                    if selected and selected[1] then
+                      SwitchObsidianVault(selected[1])
+                    end
                   end
-                end
+                }
               }
-            }
-          )
+            )
+          else
+            vim.notify("Obsidian client not initialized", vim.log.levels.ERROR)
+          end
         end
       '';
       options.silent = true;
